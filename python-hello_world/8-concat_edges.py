@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 str1 = "object-oriented "
 str2 = "programming with "
 str3 = "Python"
