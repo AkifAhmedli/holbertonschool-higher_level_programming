@@ -1,17 +1,18 @@
 #!/usr/bin/python3
 """
-Bu modul obyektin sinif mənsubiyyətini yoxlayan funksiyanı ehtiva edir.
+Bu modul obyektin sinif və ya miras mənsubiyyətini yoxlayan funksiyanı ehtiva edir.
 """
 
 
-def is_same_class(obj, a_class):
-    """Obyektin dəqiq göstərilən sinfin instansiyası olub-olmadığını yoxlayır.
+def is_kind_of_class(obj, a_class):
+    """Obyektin bir sinifdən və ya ondan miras alan sinifdən olmasını yoxlayır.
 
     Args:
         obj: Yoxlanılacaq obyekt.
         a_class: Müqayisə ediləcək sinif.
 
     Returns:
-        bool: Əgər obyekt dəqiq a_class sinfindəndirsə True, əks halda False.
+        bool: Əgər obyekt a_class-ın instansiyasıdırsa və ya a_class-dan
+        miras alan bir sinfin instansiyasıdırsa True, əks halda False.
     """
-    return type(obj) is a_class
+    return isinstance(obj, a_class)
