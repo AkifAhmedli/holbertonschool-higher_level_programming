@@ -66,7 +66,7 @@ class Rectangle:
 
         rect_lines = []
         for i in range(self.__height):
-            # print_symbol hər hansı bir tip ola bildiyi üçün str() istifadə edilir
+            # print_symbol-i string-ə çevirib eni qədər çoxaldırıq
             rect_lines.append(str(self.print_symbol) * self.__width)
         return "\n".join(rect_lines)
 
