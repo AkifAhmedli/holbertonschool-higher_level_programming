@@ -59,7 +59,6 @@ class Rectangle:
         """Düzbucaqlını # simvolu ilə vizual təsvir edir."""
         if self.__width == 0 or self.__height == 0:
             return ""
-        
         rect_lines = []
         for i in range(self.__height):
             rect_lines.append("#" * self.__width)
