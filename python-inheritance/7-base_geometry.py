@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Bu modul həndəsi fiqurlar üçün BaseGeometry klasını təyin edir.
-"""
+"""BaseGeometry klasını təyin edən modul."""
 
 
 class BaseGeometry:
@@ -11,20 +9,20 @@ class BaseGeometry:
         """Sahəni hesablayan metod (hələ tətbiq olunmayıb).
 
         Raises:
-            Exception: area() is not implemented mesajı ilə.
+            Exception: area() metodu tətbiq olunmadıqda atılır.
         """
         raise Exception("area() is not implemented")
 
     def integer_validator(self, name, value):
-        """Daxil edilən dəyərin müsbət tam ədəd olub-olmadığını yoxlayır.
+        """Daxil edilən dəyərin tam ədəd və müsbət olmasını yoxlayır.
 
         Args:
-            name (str): Dəyişənin adı (həmişə string olduğu fərz edilir).
+            name (str): Dəyişənin adı.
             value (int): Yoxlanılacaq dəyər.
 
         Raises:
-            TypeError: Əgər value tam ədəd (int) deyilsə.
-            ValueError: Əgər value 0-dan kiçik və ya bərabərdirsə.
+            TypeError: value tam ədəd (int) deyilsə.
+            ValueError: value 0-dan kiçik və ya bərabərdirsə.
         """
         if type(value) is not int:
             raise TypeError("{} must be an integer".format(name))
