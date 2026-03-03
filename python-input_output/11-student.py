@@ -19,7 +19,7 @@ class Student:
 
     def to_json(self, attrs=None):
         """
-        Obyekti lüğətə (dict) çevirir. 
+        Obyekti lüğətə (dict) çevirir.
         Əgər attrs siyahıdırsa, yalnız siyahıdakı atributları seçir.
         """
         if isinstance(attrs, list) and \
