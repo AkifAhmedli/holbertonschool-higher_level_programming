@@ -24,7 +24,8 @@ def pascal_triangle(n):
         # Hər bir element prev_row[j-1] + prev_row[j] cəmidir
         for j in range(1, i):
             row.append(prev_row[j - 1] + prev_row[j])
-       # Hər yeni sətir həmişə 1 ilə bitir
+
+        # Hər yeni sətir həmişə 1 ilə bitir
         row.append(1)
 
         # Sətri üçbucağa əlavə edirik
