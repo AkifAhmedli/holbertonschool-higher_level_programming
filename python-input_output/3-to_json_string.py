@@ -1,13 +1,12 @@
 #!/usr/bin/python3
 """
-Bu modul mətni faylın sonuna əlavə edən funksiyanı ehtiva edir.
+Bu modul obyekti JSON sətrinə çevirən funksiyanı ehtiva edir.
 """
+import json
 
 
-def append_write(filename="", text=""):
+def to_json_string(my_obj):
     """
-    UTF8 formatında mətni faylın sonuna əlavə edir və
-    əlavə olunan simvolların sayını qaytarır.
+    Obyektin (string) JSON təmsilini qaytarır.
     """
-    with open(filename, "a", encoding="utf-8") as f:
-        return f.write(text)
+    return json.dumps(my_obj)
