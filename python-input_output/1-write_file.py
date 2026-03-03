@@ -1,5 +1,11 @@
 #!/usr/bin/python3
-def write_file(filename="", text=""):
-    """Writes a string to a text file (UTF-8) and returns the number of characters written."""
-    with open(filename, "w", encoding="utf-8") as f:
-        return f.write(text)
+"""
+Bu modul faylı oxumaq (və ya yazmaq) funksiyasını ehtiva edir.
+Bu sətir modulun __doc__ atributunu təmin edir.
+"""
+
+
+def read_file(filename=""):
+    """Faylı UTF8 olaraq oxuyur və çap edir."""
+    with open(filename, encoding="utf-8") as f:
+        print(f.read(), end="")
