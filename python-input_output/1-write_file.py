@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """
-Bu modul faylı oxumaq (və ya yazmaq) funksiyasını ehtiva edir.
-Bu sətir modulun __doc__ atributunu təmin edir.
+Bu modul fayla yazı yazmaq üçün funksiyanı ehtiva edir.
 """
 
 
-def read_file(filename=""):
-    """Faylı UTF8 olaraq oxuyur və çap edir."""
-    with open(filename, encoding="utf-8") as f:
-        print(f.read(), end="")
+def write_file(filename="", text=""):
+    """
+    Mətni UTF8 formatında fayla yazır və yazılan simvolların sayını qaytarır.
+    """
+    with open(filename, "w", encoding="utf-8") as f:
+        return f.write(text)
