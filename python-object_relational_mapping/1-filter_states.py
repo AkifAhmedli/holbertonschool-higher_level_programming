@@ -1,24 +1,39 @@
 #!/usr/bin/python3
-"""Module for Selecting states starting with N"""
+"""
+'hbtn_0e_0_usa' bazasından adı 'N' ilə başlayan ştatları siyahılayır.
+MySQLdb modulundan istifadə olunur.
+"""
+import MySQLdb
+import sys
 
-if __name__ == '__main__':
-    from sys import argv
-    import MySQLdb
 
+if __name__ == "__main__":
+    # Arqumentlərin götürülməsi
+    mysql_user = sys.argv[1]
+    mysql_password = sys.argv[2]
+    db_name = sys.argv[3]
+
+    # Serverə qoşulma
     db = MySQLdb.connect(
-        user=argv[1],
-        password=argv[2],
-        database=argv[3]
+        host="localhost",
+        port=3306,
+        user=mysql_user,
+        passwd=mysql_password,
+        db=db_name
     )
+
     cursor = db.cursor()
 
-    cursor.execute('SELECT * FROM states ORDER BY id')
+    # SQL sorğusu: 'N' ilə başlayanları seçir və ID-yə görə sıralayır.
+    # BINARY istifadə etmək böyük 'N' olduğunu dəqiqləşdirir.
+    query = "SELECT * FROM states WHERE name LIKE BINARY 'N%' ORDER BY id ASC"
+    cursor.execute(query)
 
-    for state in cursor.fetchall():
-        if state[1][0] == 'N':
-            print(state)
+    # Nəticələrin emalı
+    rows = cursor.fetchall()
+    for row in rows:
+        print(row)
 
-    if cursor:
-        cursor.close()
-    if db:
-        db.close()
+    # Bağlantıların bağlanması
+    cursor.close()
+    db.close()
