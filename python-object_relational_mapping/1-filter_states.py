@@ -1,39 +1,35 @@
 #!/usr/bin/python3
 """
-'hbtn_0e_0_usa' bazasından adı 'N' ilə başlayan ştatları siyahılayır.
-MySQLdb modulundan istifadə olunur.
+'hbtn_0e_0_usa' bazasından adı 'N' ilə başlayan ştatları siyahılayan skript.
 """
 import MySQLdb
 import sys
 
-
 if __name__ == "__main__":
-    # Arqumentlərin götürülməsi
-    mysql_user = sys.argv[1]
-    mysql_password = sys.argv[2]
-    db_name = sys.argv[3]
-
-    # Serverə qoşulma
+    # Verilənlər bazasına qoşulma
+    # sys.argv[1] -> username, sys.argv[2] -> password, sys.argv[3] -> database
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
-        user=mysql_user,
-        passwd=mysql_password,
-        db=db_name
+        user=sys.argv[1],
+        passwd=sys.argv[2],
+        db=sys.argv[3]
     )
 
     cursor = db.cursor()
 
     # SQL sorğusu: 'N' ilə başlayanları seçir və ID-yə görə sıralayır.
-    # BINARY istifadə etmək böyük 'N' olduğunu dəqiqləşdirir.
+    # BINARY açar sözü böyük/kiçik hərf fərqini (N vs n) dəqiqləşdirir.
     query = "SELECT * FROM states WHERE name LIKE BINARY 'N%' ORDER BY id ASC"
     cursor.execute(query)
 
-    # Nəticələrin emalı
+    # Bütün uyğun sətirləri götürürük
     rows = cursor.fetchall()
+
+    # Nəticələri çap edirik
     for row in rows:
         print(row)
 
-    # Bağlantıların bağlanması
+    # Bağlantıları bağlayırıq
     cursor.close()
     db.close()
