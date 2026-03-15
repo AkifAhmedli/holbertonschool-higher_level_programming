@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 hbtn_0e_0_usa verilənlər bazasından bütün ştatları siyahılayan skript.
 Bu skript 3 arqument qəbul edir: mysql istifadəçi adı, şifrə və baza adı.
