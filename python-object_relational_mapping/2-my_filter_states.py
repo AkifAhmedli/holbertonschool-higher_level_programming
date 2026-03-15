@@ -1,33 +1,27 @@
 #!/usr/bin/python3
-"""
-Displays all values in the states table of hbtn_0e_0_usa
-where name matches the argument. Safe from SQL injections.
-"""
-import MySQLdb
-import sys
+"""Module for Selecting states where name equals argument"""
 
-if __name__ == "__main__":
-    # Verilənlər bazasına qoşulma
+if __name__ == '__main__':
+    from sys import argv
+    import MySQLdb
+
     db = MySQLdb.connect(
-        host="localhost",
-        port=3306,
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3]
+        user=argv[1],
+        password=argv[2],
+        database=argv[3]
     )
+
     cursor = db.cursor()
 
-    # Sorğuda parametrli üsuldan (%s) istifadə edirik.
-    # Bu, Check 9-da yoxlanılan xüsusi simvolların (məsələn: Arizona') 
-    # təhlükəsiz şəkildə emal olunmasını təmin edir.
-    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
-    # execute funksiyasına arqumenti mütləq tuple daxilində göndər
-    cursor.execute(query, (sys.argv[4],))
+    cursor.execute("SELECT * \
+                    FROM `states` \
+                    WHERE BINARY `name` = '{}' \
+                    ORDER BY id".format(argv[4]))
 
-    rows = cursor.fetchall()
-    for row in rows:
-        print(row)
+    for state in cursor.fetchall():
+        print(state)
 
-    # Bağlantıları təmiz bağla
-    cursor.close()
-    db.close()
+    if cursor:
+        cursor.close()
+    if db:
+        db.close()
