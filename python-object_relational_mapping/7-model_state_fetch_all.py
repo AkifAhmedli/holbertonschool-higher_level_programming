@@ -1,30 +1,39 @@
 #!/usr/bin/python3
 """
-'hbtn_0e_6_usa' bazasından bütün State obyektlərini 
-SQLAlchemy vasitəsilə çəkən və siyahılayan skript.
+Lists all State objects from the database hbtn_0e_6_usa
+using SQLAlchemy.
 """
 import sys
 from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+
 if __name__ == "__main__":
-    # Verilənlər bazası mühərriki (engine) yaradılır
-    # Format: mysql+mysqldb://user:password@localhost:3306/dbname
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
-        sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
-    # Sessiya (Session) sinifi yaradılır və mühərrikə bağlanır
+    # 1. Database connection details from arguments
+    user = sys.argv[1]
+    passwd = sys.argv[2]
+    db_name = sys.argv[3]
+
+    # 2. Create the engine
+    # Format: mysql+mysqldb://user:password@host:port/database
+    engine = create_engine(
+        'mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
+            user, passwd, db_name), pool_pre_ping=True
+    )
+
+    # 3. Create a configured "Session" class
     Session = sessionmaker(bind=engine)
-    # Faktiki sessiya nümunəsi yaradılır
+
+    # 4. Create a session instance
     session = Session()
 
-    # Bütün State obyektlərini id-yə görə artan sıra ilə sorğulayırıq
-    # Bu, SQL-dəki "SELECT * FROM states ORDER BY id ASC" əmrinə bərabərdir
+    # 5. Query all State objects, sorted by id
     states = session.query(State).order_by(State.id).all()
 
-    # Nəticələri tələb olunan formatda çap edirik
+    # 6. Display results in the required format <id>: <name>
     for state in states:
         print("{}: {}".format(state.id, state.name))
 
-    # Sessiyanı bağlayırıq
+    # 7. Close the session
     session.close()
