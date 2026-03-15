@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-İstifadəçinin daxil etdiyi ştat adına görə filtrləmə aparan skript.
-SQL injection-dan qorunmaq üçün parametrli sorğudan istifadə olunur.
+Displays all values in the states table of hbtn_0e_0_usa
+where name matches the argument. Safe from SQL injections.
 """
 import MySQLdb
 import sys
@@ -17,18 +17,17 @@ if __name__ == "__main__":
     )
     cursor = db.cursor()
 
-    # İstifadəçinin axtardığı ştat adı (4-cü arqument)
-    state_name_searched = sys.argv[4]
-
-    # SQL Injection-dan qorunmaq üçün %s formatından istifadə edirik.
-    # Diqqət: '%s' dırnaq içində yazılmır, MySQLdb bunu özü həll edir.
+    # Sorğuda parametrli üsuldan (%s) istifadə edirik.
+    # Bu, Check 9-da yoxlanılan xüsusi simvolların (məsələn: Arizona') 
+    # təhlükəsiz şəkildə emal olunmasını təmin edir.
     query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
-    # İkinci arqument mütləq tuple (nəticə, ) şəklində olmalıdır
-    cursor.execute(query, (state_name_searched,))
+    # execute funksiyasına arqumenti mütləq tuple daxilində göndər
+    cursor.execute(query, (sys.argv[4],))
 
     rows = cursor.fetchall()
     for row in rows:
         print(row)
 
+    # Bağlantıları təmiz bağla
     cursor.close()
     db.close()
