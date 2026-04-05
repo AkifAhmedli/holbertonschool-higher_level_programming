@@ -11,9 +11,8 @@ def create_database():
             price REAL NOT NULL
         )
     ''')
-    # Məlumatları daxil edirik (Təkrar daxil olmaması üçün "OR IGNORE" istifadə edilə bilər)
     cursor.execute('''
-        INSERT OR IGNORE INTO Products (id, name, category, price)
+        INSERT INTO Products (id, name, category, price)
         VALUES
         (1, 'Laptop', 'Electronics', 799.99),
         (2, 'Coffee Mug', 'Home Goods', 15.99)
